@@ -47,7 +47,7 @@ before((done) => {
 
 // tests
 
-describe("Server!", () => {
+describe("App", () => {
 
     let patientId;
 
@@ -136,8 +136,8 @@ describe("Server!", () => {
 
     })
 
-    // check for "/patients/register"
-    it("/patients/register", done => {
+    // check for "/reports/:status"
+    it("/reports/:status", done => {
         let status = "Negative";
         chai
             .request(app)
@@ -148,6 +148,97 @@ describe("Server!", () => {
                 done();
             })
     });
+
+
+    // all the checks if authentication fails
+    it("UnAuthentication check for ==> /patients/register", done => {
+
+        // patient details
+        let patient = {
+            phone: "9999999999"
+        }
+
+
+
+        //checks for unauthenticated
+        chai
+            .request(app)
+            .post(`/api/v1/patients/register`)
+            .type("form")
+            .send(patient)
+            .end(
+                (err, res) => {
+                    // status should be 500
+                    res.should.have.status(404);
+                    res.body.should.be.a('object');
+                    expect(res.body.error).to.equals("Authentication failed");
+                    done();
+                }
+            )
+
+
+    })
+
+
+    // check for /create/report
+    // check for unAuthenticated Error
+    it("Check UnAuthenticated for ==> /patients/:patientid/create_report", (done) => {
+
+        // object to be passes
+        let report = {
+            status: "Negative"
+        }
+
+
+        chai
+            .request(app)
+            .post(`/api/v1/patients/${patientId}/create_report`)
+            .type("form")
+            .send(report)
+            .end(
+                (err, res) => {
+
+                    // status should be 500
+                    res.should.have.status(404);
+                    res.body.should.be.a('object');
+                    expect(res.body.error).to.equals("Authentication failed");
+                    done();
+                }
+            )
+    })
+
+    // checks if any other conditions are violated
+    // check if a doctor tries to re register a patient
+    it("Duplicate Patient Insertion ==> /patients/register", async done => {
+
+        // patient details
+        const patient = await Patient.findById(patientId);
+        // create a duplicate id
+        let data = {
+            phone: patient.phone
+        }
+
+
+
+        chai
+            .request(app)
+            .post(`/api/v1/patients/register`)
+            .type("form")
+            .send(data)
+            .set({ "Authorization": `Bearer ${token}` })
+            .end(
+                (err, res) => {
+
+                    // status should be 500
+                    res.should.have.status(500);
+                    res.body.should.be.a('object');
+                    expect(res.body.message).to.equals("Patient already exist.");
+
+                }
+            )
+
+
+    })
 
 
 })
