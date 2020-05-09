@@ -7,7 +7,7 @@ const patientSchema = new mongoose.Schema({
     phone: {
         type: "String",
         required: true,
-        validate: validator.isMobilePhone
+        validate: /^\d{10}$/
     },
     reports: [{
         type: mongoose.Schema.Types.ObjectId,
