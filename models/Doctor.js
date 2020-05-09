@@ -1,18 +1,10 @@
 const mongoose = require("mongoose");
-const validator = require("validator");
 const bcrypt = require("bcrypt");
 // create doctor schema
 const doctorSchema = mongoose.Schema({
 
     // details
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        validate: validator.isEmail
-    },
+
     username: {
         type: String,
         required: true,

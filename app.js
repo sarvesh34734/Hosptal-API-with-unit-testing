@@ -5,10 +5,13 @@ const db = require("./config/mongoose");
 
 
 
+// set up encoding
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 
-
-
+// set up routes
+app.use("/", require("./routes"));
 
 
 
