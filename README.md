@@ -61,3 +61,6 @@
   * Replace ":status" in the above url from one of these ['Negative', 'Travelled-Quarantine',   'Symptoms-Quarantine',
   'Positive-Admit']. These values are case-sensitive.
   * You will need to pass the token as described in above route2 (Point number 5). Generate a new token if expired.
+## Running test commands
+* If you wish to run npm test, then first create a doctor with following login credentials:{username: 'username',
+    password: 'password'} by using route "localhost:3000/api/v1/doctors/register". You can also edit app.test.js file inside test folder to add your own credentials.
