@@ -16,14 +16,14 @@ module.exports.register = async function (req, res) {
             // create doctor
             await Doctor.create(req.body);
             //return response
-            res.status(200).json({
+            return res.status(200).json({
                 success: true,
                 message: "Doctor created successfully"
             })
 
         } else {
             // doctor already exists message
-            res.status(500).json({
+            return res.status(500).json({
                 message: `Doctor already exists in database. Please login using 'localhost:${port}/api/v1/doctors/login'`
             })
         }

@@ -30,3 +30,10 @@ app.listen(port, (err) => {
     }
     console.log(`Server is up and running on port :: ${port}`);
 })
+
+module.exports = app;
+
+
+
+
+//node_modules/mocha/bin/mocha ./test
