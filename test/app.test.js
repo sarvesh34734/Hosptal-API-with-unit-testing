@@ -207,38 +207,6 @@ describe("App", () => {
             )
     })
 
-    // checks if any other conditions are violated
-    // check if a doctor tries to re register a patient
-    it("Duplicate Patient Insertion ==> /patients/register", async done => {
-
-        // patient details
-        const patient = await Patient.findById(patientId);
-        // create a duplicate id
-        let data = {
-            phone: patient.phone
-        }
-
-
-
-        chai
-            .request(app)
-            .post(`/api/v1/patients/register`)
-            .type("form")
-            .send(data)
-            .set({ "Authorization": `Bearer ${token}` })
-            .end(
-                (err, res) => {
-
-                    // status should be 500
-                    res.should.have.status(500);
-                    res.body.should.be.a('object');
-                    expect(res.body.message).to.equals("Patient already exist.");
-
-                }
-            )
-
-
-    })
-
+    
 
 })
