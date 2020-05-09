@@ -20,13 +20,13 @@
   * Method:POST
   * Url: "localhost:3000/api/v1/doctors/register"
   * You can pass the request either in url-encoded or raw json format.
-  * Parameters: {username:"xyz",password:"abc"}
+  * Parameters: {"username":"xyz","password":"abc"}
 
 ### Login a doctor using username and password
   * Method:POST
   * Url: "localhost:3000/api/v1/doctors/login"
   * You can pass the request either in url-encoded or raw json format.
-  * Parameters: {username:"xyz",password:"abc"}
+  * Parameters: {"username":"xyz","password":"abc"}
   * The response of this request will contain an encrypted token that you need to store for future purposes. It will be valid for
   1hour.
 
@@ -34,7 +34,7 @@
   * Method:POST
   * Url: "localhost:3000/api/v1/patients/register"
   * You can pass the request either in url-encoded or raw json format.
-  * Parameters: {phone:"1234567891"}
+  * Parameters: {"phone":"1234567891"}
   * You will need the token generated in previous step. After passing the above parameters to request.body, add that token to
   headers in postman. Create a new field "Authorization" and pass the toke value as "Bearer "
   +{token value generated in previous step}.
@@ -45,7 +45,7 @@
   * Url: "localhost:3000/api/v1/patients/:patientId/create_report"
   * In the above Url the ":patientId" must be replaced by a valid id of the existing patients _id in database.
   * You can pass the request either in url-encoded or raw json format.
-  * Parameters: {status:"Negative"}. [#Note value of status can only be among ['Negative', 'Travelled-Quarantine', 
+  * Parameters: {"status":"Negative"}. [#Note value of status can only be among ['Negative', 'Travelled-Quarantine', 
   'Symptoms-Quarantine', 'Positive-Admit']]. These values are case-sensitive.
   * You will need to pass the token as described in above route2 (Point number 5).
 
