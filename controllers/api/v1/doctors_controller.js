@@ -24,7 +24,7 @@ module.exports.register = async function (req, res) {
         } else {
             // doctor already exists message
             return res.status(500).json({
-                message: `Doctor already exists in database. Please login using 'localhost:${port}/api/v1/doctors/login'`
+                message: "Doctor already exists in database."`
             })
         }
     } catch{
